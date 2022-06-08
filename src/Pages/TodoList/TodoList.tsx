@@ -1,36 +1,16 @@
-import React, { useState } from 'react';
-import Modal from '../../Components/Modal/Modal';
-import { Todo } from '../../Globals/types';
+import React from 'react';
+import TodoComponent from '../../Components/Todo';
+import InProgress from '../../Components/InProgress';
+import Done from '../../Components/Done';
+import styles from './TodoList.module.css';
 
 const TodoList = () => {
-  const [openModal, setOpenModal] = useState(false);
-  const [addTask, setAddTask] = useState<Array<Todo>>([]);
-
-  const handleClickOpenModal = () => {
-    setOpenModal(true);
-  }
-
-  const handleClickSave = (title: string, description: string) => {
-    setAddTask([
-      ...addTask,
-      { title,
-        description,
-    }])
-  }
 
   return (
     <div>
-      <h3>To do</h3>
-      {addTask.map((task: Todo) => {
-        return (
-          <div>
-            <p>{task.title}</p>
-            <p>{task.description}</p>
-          </div>
-        )
-      })}
-      <button onClick={handleClickOpenModal}>+ Add new task</button>
-      {openModal && <Modal saveBtn={handleClickSave}></Modal>}
+      <TodoComponent className={styles.listContainer}></TodoComponent>
+      <InProgress></InProgress>
+      <Done></Done>
     </div>
   )
 };
